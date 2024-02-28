@@ -43,7 +43,27 @@ public class MyArrayList {
 			newList[i] = list[i];
 		}
 		
+		size = newSize;
 		list = newList;
 		System.gc();
+	}
+	
+	//Add element at the end of list.
+	public void addElement (int element) throws IllegalArgumentException {
+		if (isFull()) resize();
+		list[counter++] = element;
+	}
+	
+	//Add element at position.
+	public void insertElement (int element, int pos) throws IllegalArgumentException {
+		if (pos < 0 || pos > counter) throw new IllegalArgumentException();
+		if (isFull()) resize();
+		if (pos == counter) addElement(element);
+		
+		for (int i = counter; i < pos; i--) {
+			list[i] = list[i-1];
+		}
+		list[pos] = element;
+		counter++;
 	}
 }
