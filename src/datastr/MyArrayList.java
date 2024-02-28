@@ -55,8 +55,8 @@ public class MyArrayList {
 	}
 	
 	//Add element at position.
-	public void insertElement (int element, int pos) throws IllegalArgumentException {
-		if (pos < 0 || pos > counter) throw new IllegalArgumentException();
+	public void insertElement (int element, int pos) throws Exception {
+		if (pos < 0 || pos > counter) throw new Exception("Incorrect index.");
 		if (isFull()) resize();
 		if (pos == counter) addElement(element);
 		
@@ -65,5 +65,15 @@ public class MyArrayList {
 		}
 		list[pos] = element;
 		counter++;
+	}
+	
+	public void removeElement (int pos) throws Exception {
+		if (pos < 0 || pos >= counter) throw new Exception("Incorrect index.");
+		else if (isEmpty()) throw new Exception("Current list is empty.");
+
+		for (int i = pos; i < counter - 1; i++) {
+			list[i] = list[i+1];
+		}
+		counter--;
 	}
 }
