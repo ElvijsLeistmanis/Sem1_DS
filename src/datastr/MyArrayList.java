@@ -137,4 +137,24 @@ public class MyArrayList {
 		list = new int[size];
 		System.gc();
 	}
+	
+	private void swap (int index1, int index2) {
+		int temp = list[index1];
+		list[index1] = list[index2];
+		list[index2] = temp;
+	}
+	
+	//TODO
+	//add asc, desc
+	public void sort() throws Exception{
+		if (isEmpty()) throw new Exception("Current list is empty.");
+		
+		for(int i = 0; i < counter; i++) {
+			for (int j = 0; j < counter; j++) {
+				if(list[i] > list[j]) {
+					swap(i, j);
+				}
+			}
+		}
+	}
 }
