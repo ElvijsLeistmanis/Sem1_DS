@@ -1,5 +1,7 @@
 package datastr;
 
+import java.util.ArrayList;
+
 public class MyArrayList {
 	private int[] list;
 	private final int LIST_DEFAULT_SIZE = 10;
@@ -67,6 +69,7 @@ public class MyArrayList {
 		counter++;
 	}
 	
+	//Remove element at position.
 	public void removeElement (int pos) throws Exception {
 		if (pos < 0 || pos >= counter) throw new Exception("Incorrect index.");
 		else if (isEmpty()) throw new Exception("Current list is empty.");
@@ -75,5 +78,45 @@ public class MyArrayList {
 			list[i] = list[i+1];
 		}
 		counter--;
+	}
+	
+	//Get element at position.
+	public int getElement(int pos) throws Exception {
+		if (pos < 0 || pos > counter) throw new Exception("Incorrect index.");
+		if (isEmpty()) throw new Exception("Current list is empty.");
+		return list[pos];
+	}
+	
+	//Find given element.
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ArrayList findElement (int element) throws Exception {
+		if (isEmpty()) throw new Exception("Current list is empty.");
+		ArrayList posList = new ArrayList();
+		
+		for (int i = 0; i < counter; i++) {
+			if (list[i] == element) posList.add(i);
+		}
+		
+		if(posList.isEmpty()) throw new Exception("Element not found.");
+		return posList;
+	}
+	
+	//Find element after another given element.
+	@SuppressWarnings({"rawtypes"})
+	public int[] findNextElement (int element) throws Exception {
+		if (isEmpty()) throw new Exception("Current list is empty.");
+		ArrayList posList = findElement(element);
+		int neighboursSize = posList.size();
+		
+		//Last index.
+		if((Integer)posList.get(posList.size()- 1) == counter - 1) neighboursSize--;
+		
+		int[] neighbours = new int[neighboursSize];
+		for (int i = 0; i < neighboursSize; i++) {
+			int indexFromSearchTemp =(int)posList.get(i);
+			int indexNeighbourTemp = indexFromSearchTemp + 1;
+			neighbours[i] = list[indexNeighbourTemp];
+		}
+		return neighbours;
 	}
 }
