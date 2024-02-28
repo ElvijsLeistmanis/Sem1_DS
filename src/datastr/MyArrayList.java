@@ -119,4 +119,22 @@ public class MyArrayList {
 		}
 		return neighbours;
 	}
+	
+	//Output list.
+	public void print() throws Exception{
+		if (isEmpty()) throw new Exception("Current list is empty.");
+		
+		System.out.print("( ");
+		for (int i = 0; i < counter; i++) {
+			System.out.print(i + " ");
+		}
+		System.out.println(" )");
+	}
+	
+	public void makeEmpty() {
+		counter = 0;
+		size = LIST_DEFAULT_SIZE;
+		list = new int[size];
+		System.gc();
+	}
 }
